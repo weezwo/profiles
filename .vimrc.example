@@ -32,6 +32,7 @@ Plug 'djoshea/vim-autoread'
 Plug 'slim-template/vim-slim'
 Plug 'airblade/vim-gitgutter'
 Plug 'morhetz/gruvbox'
+Plug 'pangloss/vim-javascript'
 
 call plug#end()
 """""""""""""""""""""""""""
