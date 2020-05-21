@@ -33,6 +33,7 @@ Plug 'slim-template/vim-slim'
 Plug 'airblade/vim-gitgutter'
 Plug 'morhetz/gruvbox'
 Plug 'pangloss/vim-javascript'
+Plug 'tpope/vim-surround'
 
 call plug#end()
 """""""""""""""""""""""""""
