@@ -170,6 +170,7 @@ function extract () {
   alias gbb="git branch -b"
   alias hbu="heroku pg:backups:capture --app flatiron-instructor-app; rm latest.dump; heroku pg:backups:download --app flatiron-instructor-app; rake local_setup:setup[luisa]"
 
+  alias note="bash ~/dev/scripts/note"
 
 # Case-Insensitive Auto Completion
   bind "set completion-ignore-case on"
