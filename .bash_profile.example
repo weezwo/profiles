@@ -171,6 +171,7 @@ function extract () {
   alias hbu="heroku pg:backups:capture --app flatiron-instructor-app; rm latest.dump; heroku pg:backups:download --app flatiron-instructor-app; rake local_setup:setup[luisa]"
 
   alias note="bash ~/dev/scripts/note"
+  alias webserver="python -m SimpleHTTPServer 8000"
 
 # Case-Insensitive Auto Completion
   bind "set completion-ignore-case on"
