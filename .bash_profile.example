@@ -171,7 +171,8 @@ function extract () {
   alias hbu="heroku pg:backups:capture --app flatiron-instructor-app; rm latest.dump; heroku pg:backups:download --app flatiron-instructor-app; rake local_setup:setup[luisa]"
 
   alias note="bash ~/dev/scripts/note"
-  alias webserver="python -m SimpleHTTPServer 8000"
+  alias webserver="python -m SimpleHTTPServer 8000" # start simple js server
+  alias pgserver="postgres -D /usr/local/var/postgres" # start pg server
 
 # Case-Insensitive Auto Completion
   bind "set completion-ignore-case on"
@@ -202,3 +203,8 @@ export NVM_DIR="$HOME/.nvm"
   # Mandatory loading of RVM into the shell
   # This must be the last line of your bash_profile always
   [[ -s "/Users/$USER/.rvm/scripts/rvm" ]] && source "/Users/$USER/.rvm/scripts/rvm"  # This loads RVM into a shell session.
+
+# Setting PATH for Python 3.8
+# The original version is saved in .bash_profile.pysave
+PATH="/Library/Frameworks/Python.framework/Versions/3.8/bin:${PATH}"
+export PATH
