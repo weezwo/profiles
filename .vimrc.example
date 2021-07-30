@@ -23,7 +23,9 @@ Plug 'Townk/vim-autoclose'
 Plug 'tpope/vim-commentary'
 Plug 'Yggdroot/indentLine'
 Plug 'jistr/vim-nerdtree-tabs'
-Plug 'scrooloose/nerdtree'
+Plug 'preservim/nerdtree' |
+  \ Plug 'Xuyuanp/nerdtree-git-plugin' |
+  \ Plug 'ryanoasis/vim-devicons'
 Plug 'vim-ruby/vim-ruby'
 Plug 'ervandew/supertab'
 Plug 'posva/vim-vue'
@@ -34,6 +36,7 @@ Plug 'airblade/vim-gitgutter'
 Plug 'morhetz/gruvbox'
 Plug 'pangloss/vim-javascript'
 Plug 'tpope/vim-surround'
+Plug 'evanleck/vim-svelte'
 
 call plug#end()
 """""""""""""""""""""""""""
@@ -98,6 +101,10 @@ let g:indentLine_enabled=1
 let g:indentLine_color_term=235
 let g:indentLine_char='┆'
 
+" NERDTree
+let g:NERDTreeGitStatusUseNerdFonts = 1
+let g:NERDTreeGitStatusShowClean = 1
+
 " Syntastic
 set statusline+=%#warningmsg#
 set statusline+=%{SyntasticStatuslineFlag()}
@@ -116,6 +123,9 @@ set background=dark
 set termguicolors
 "set guifont=Space\ Mono\ for\ Powerline:h14
 autocmd vimenter * colorscheme gruvbox
+
+" Treat .svelte files like html
+au! BufNewFile,BufRead *.svelte set ft=html
 
 " Close buffer properly with NERDtree
 " http://stackoverflow.com/questions/1864394/vim-and-nerd-tree-closing-a-buffer-properly
