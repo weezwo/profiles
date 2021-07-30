@@ -104,6 +104,9 @@ let g:indentLine_char='┆'
 " NERDTree
 let g:NERDTreeGitStatusUseNerdFonts = 1
 let g:NERDTreeGitStatusShowClean = 1
+let g:NERDTreeGitStatusGitBinPath = '/usr/bin/git'
+
+autocmd BufWinEnter * if getcmdwintype() == '' | silent NERDTreeMirror | endif " auto-open nerdtree in new tabs
 
 " Syntastic
 set statusline+=%#warningmsg#
