@@ -70,7 +70,7 @@
     # Those NODE & Python Paths won't break anything even if you
     # don't have NODE or Python installed. Eventually you will and
     # then you don't have to update your bash_profile
-
+    
   # Configurations
 
     # GIT_MERGE_AUTO_EDIT
@@ -78,8 +78,8 @@
     export GIT_MERGE_AUTOEDIT='no'
 
     # Editors
-    # Tells your shell that when a program requires various editors, use visual studio code
-    # The -w flag tells your shell to wait until video studio code exits
+    # Tells your shell that when a program requires various editors, use vim
+    # The -w flag tells your shell to wait until visual studio code exits (n/a)
     export VISUAL="vim"
     export SVN_EDITOR="vim"
     export GIT_EDITOR="vim"
@@ -208,7 +208,8 @@ export PATH="/opt/local/bin:/opt/local/sbin:$PATH"
 # Finished adapting your PATH environment variable for use with MacPorts.
 
 export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"
+  [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"
+  [ -s "/usr/local/opt/nvm/etc/bash_completion.d/nvm" ] && \. "/usr/local/opt/nvm/etc/bash_completion.d/nvm"  # This loads nvm bash_completion
   # RVM
   # Mandatory loading of RVM into the shell
   # This must be the last line of your bash_profile always
