@@ -1,221 +1,240 @@
+"set runtimepath+=~/.vim_runtime
 
-# Configuring Our Prompt
-# ======================
+"source ~/.vim_runtime/vimrcs/basic.vim
+"source ~/.vim_runtime/vimrcs/filetypes.vim
+"source ~/.vim_runtime/vimrcs/plugins_config.vim
+"source ~/.vim_runtime/vimrcs/extended.vim
 
-  # if you install git via homebrew, or install the bash autocompletion via homebrew, you get __git_ps1 which you can use in the PS1
-  # to display the git branch.  it's supposedly a bit faster and cleaner than manually parsing through sed. i dont' know if you care
-  # enough to change it
+"try
+"source ~/.vim_runtime/my_configs.vim
+"catch
+"endtry
 
-  # This function is called in your prompt to output your active git branch.
-  function parse_git_branch {
-    git branch --no-color 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/ (\1)/'
-  }
+"""""""""""""""""""""""""""
+" Plugins
+"""""""""""""""""""""""""""
+call plug#begin('~/.vim/plugged')
 
-  # This function builds your prompt. It is called below
-  function prompt {
-    # Define the prompt character
-    local   CHAR="♥"
+Plug 'tpope/vim-fugitive'
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
+"Plug 'jiangmiao/auto-pairs'
+Plug 'Townk/vim-autoclose'
+Plug 'tpope/vim-commentary'
+Plug 'Yggdroot/indentLine'
+Plug 'jistr/vim-nerdtree-tabs'
+Plug 'preservim/nerdtree' |
+  \ Plug 'Xuyuanp/nerdtree-git-plugin' |
+  \ Plug 'ryanoasis/vim-devicons'
+Plug 'vim-ruby/vim-ruby'
+Plug 'ervandew/supertab'
+Plug 'posva/vim-vue'
+Plug 'severin-lemaignan/vim-minimap'
+Plug 'djoshea/vim-autoread'
+Plug 'slim-template/vim-slim'
+Plug 'airblade/vim-gitgutter'
+Plug 'morhetz/gruvbox'
+Plug 'pangloss/vim-javascript'
+Plug 'tpope/vim-surround'
+Plug 'evanleck/vim-svelte'
+Plug 'leafgarland/typescript-vim'
+Plug 'maxmellon/vim-jsx-pretty'
 
-    # Define some local colors
-    local   RED="\[\e[0;31m\]"
-    local   BLUE="\[\e[0;34m\]"
-    local   GREEN="\[\e[0;32m\]"
-    local   GRAY_TEXT_BLUE_BACKGROUND="\[\e[37;44;1m\]"
-    local   GRAY_TEXT_PINK_BACKGROUND="\[\e[48;5;175m\]"
+call plug#end()
+"""""""""""""""""""""""""""
 
-    #local PINK="\e[38;5;205m\]"
-    local PINK="\e[38;5;13m\]"
-    local LIGHT_PINK="\e[38;5;175m\]"
-    local DARK_PINK="\e[38;5;198m\]"
-    local CORAL="\e[38;5;204m\]"
+" disable bells
+autocmd! GUIEnter * set vb t_vb=
 
-    # Define a variable to reset the text color
-    local   RESET="\[\e[0m\]"
+" Do not make vim compatible with vi.
+set nocompatible
 
-    # ♥ ☆ - Keeping some cool ASCII Characters for reference
+" Do not create .swp files
+set noswapfile
 
-    # Here is where we actually export the PS1 Variable which stores the text for your prompt
-    # export PS1="\[\e]2;\u@\h\a[$GRAY_TEXT_BLUE_BACKGROUND\t$RESET]$RED\$(parse_git_branch) $GREEN\W\n$BLUE//$RED $CHAR $RESET"
+" Number the lines.
+set number
 
-    export PS1="\[\e]2;\u@\h\a[$GRAY_TEXT_PINK_BACKGROUND\t$RESET]$PINK\$(parse_git_branch) $LIGHT_PINK\W\n$LIGHT_PINK>>$PINK $CHAR $RESET"
-      PS2='> '
-      PS4='+ '
-    }
+" Show auto complete menus.
+set wildmenu
 
-  # Finally call the function and our prompt is all pretty
-  prompt
+" Make wildmenu behave like bash completion. Finding commands are so easy now.
+set wildmode=list:longest
 
-  # For more prompt coolness, check out Halloween Bash:
-  # http://xta.github.io/HalloweenBash/
+" Enable mouse pointing
+set mouse=a
 
-  # If you break your prompt, just delete the last thing you did.
-  # And that's why it's good to keep your dotfiles in git too.
+" ALWAYS spaces
+set expandtab
 
-  # A handy function to open your bash profile from any directory
-  function bp {
-    $EDITOR ~/.bash_profile
-  }
+" Fix backspace behavior
+set backspace=indent,eol,start
 
-# Environment Variables
-# =====================
-  # Library Paths
-  # These variables tell your shell where they can find certain
-  # required libraries so other programs can reliably call the variable name
-  # instead of a hardcoded path.
+" Use system clipboard
+set clipboard+=unnamed
 
-    # NODE_PATH
-    # Node Path from Homebrew I believe
-    export NODE_PATH="/usr/local/lib/node_modules:$NODE_PATH"
+" Keep Undo history on buffer change
+set hidden
 
-    # Those NODE & Python Paths won't break anything even if you
-    # don't have NODE or Python installed. Eventually you will and
-    # then you don't have to update your bash_profile
-    
-  # Configurations
+" Reload files after change on Disk
+"set autoread
+"au CursorHold * checktime
 
-    # GIT_MERGE_AUTO_EDIT
-    # This variable configures git to not require a message when you merge.
-    export GIT_MERGE_AUTOEDIT='no'
+" Turn on syntax hightlighting.
+set syntax=on
+set nowrap
+set tabstop=2
+set shiftwidth=2
+set nocindent
 
-    # Editors
-    # Tells your shell that when a program requires various editors, use vim
-    # The -w flag tells your shell to wait until visual studio code exits (n/a)
-    export VISUAL="vim"
-    export SVN_EDITOR="vim"
-    export GIT_EDITOR="vim"
-    export EDITOR="vim"
+" Speed optimization
+set ttyfast
+set lazyredraw
 
-    # Version
-    # What version of the Flatiron School bash profile this is
-    export FLATIRON_VERSION='1.1.1'
-  # Paths
+" Airline
+set laststatus=2
+let g:airline#extensions#tabline#enabled=1
+let g:airline_theme='bubblegum'
+let g:airline_powerline_fonts=1
+let g:airline#extensions#branch#enabled=1
 
-    # The USR_PATHS variable will just store all relevant /usr paths for easier usage
-    # Each path is seperate via a : and we always use absolute paths.
+" Indent Guides
+let g:indentLine_enabled=1
+let g:indentLine_color_term=235
+let g:indentLine_char='┆'
 
-    # A bit about the /usr directory
-    # The /usr directory is a convention from linux that creates a common place to put
-    # files and executables that the entire system needs access too. It tries to be user
-    # independent, so whichever user is logged in should have permissions to the /usr directory.
-    # We call that /usr/local. Within /usr/local, there is a bin directory for actually
-    # storing the binaries (programs) that our system would want.
-    # Also, Homebrew adopts this convetion so things installed via Homebrew
-    # get symlinked into /usr/local
-    export USR_PATHS="/usr/local:/usr/local/bin:/usr/local/sbin:/usr/bin"
+" NERDTree
+let g:NERDTreeGitStatusUseNerdFonts = 1
+let g:NERDTreeGitStatusShowClean = 1
+let g:NERDTreeGitStatusGitBinPath = '/usr/bin/git'
 
-    # Hint: You can interpolate a variable into a string by using the $VARIABLE notation as below.
+autocmd BufWinEnter * if getcmdwintype() == '' | silent NERDTreeMirror | endif " auto-open nerdtree in new tabs
+  " Exit Vim if NERDTree is the only window remaining in the only tab.
+autocmd BufEnter * if tabpagenr('$') == 1 && winnr('$') == 1 && exists('b:NERDTree') && b:NERDTree.isTabTree() | quit | endif
+" Close the tab if NERDTree is the only window remaining in it.
+autocmd BufEnter * if winnr('$') == 1 && exists('b:NERDTree') && b:NERDTree.isTabTree() | quit | endif
+" If another buffer tries to replace NERDTree, put it in the other window, and bring back NERDTree.
+autocmd BufEnter * if bufname('#') =~ 'NERD_tree_\d\+' && bufname('%') !~ 'NERD_tree_\d\+' && winnr('$') > 1 |
+    \ let buf=bufnr() | buffer# | execute "normal! \<C-W>w" | execute 'buffer'.buf | endif
+" Start NERDTree when Vim starts with a directory argument.
+autocmd StdinReadPre * let s:std_in=1
+autocmd VimEnter * if argc() == 1 && isdirectory(argv()[0]) && !exists('s:std_in') |
+    \ execute 'NERDTree' argv()[0] | wincmd p | enew | execute 'cd '.argv()[0] | endif
 
-    # We build our final PATH by combining the variables defined above
-    # along with any previous values in the PATH variable.
+" Syntastic
+set statusline+=%#warningmsg#
+set statusline+=%{SyntasticStatuslineFlag()}
+set statusline+=%*
 
-    # Our PATH variable is special and very important. Whenever we type a command into our shell,
-    # it will try to find that command within a directory that is defined in our PATH.
-    # Read http://blog.seldomatt.com/blog/2012/10/08/bash-and-the-one-true-path/ for more on that.
-    export PATH="$USR_PATHS:$PATH"
+let g:syntastic_always_populate_loc_list=1
+let g:syntastic_auto_loc_list=1
+let g:syntastic_check_on_open=1
+let g:syntastic_check_on_wq=0
 
-    # If you go into your shell and type: echo $PATH you will see the output of your current path.
-    # For example, mine is:
-    # /Users/avi/.rvm/gems/ruby-1.9.3-p392/bin:/Users/avi/.rvm/gems/ruby-1.9.3-p392@global/bin:/Users/avi/.rvm/rubies/ruby-1.9.3-p392/bin:/Users/avi/.rvm/bin:/usr/local:/usr/local/bin:/usr/local/sbin:/usr/bin:/usr/local/mysql/bin:/usr/local/share/python:/bin:/usr/sbin:/sbin:
+" Start Minimap
+" autocmd VimEnter * Minimap
 
-# Helpful Functions
-# =====================
+" Theme
+set background=dark
+set termguicolors
+"set guifont=Space\ Mono\ for\ Powerline:h14
+set guifont=Inconsolata\ for\ Powerline:h14
+autocmd vimenter * colorscheme gruvbox
 
-# A function to CD into the desktop from anywhere
-# so you just type desktop.
-# HINT: It uses the built in USER variable to know your OS X username
+" Treat .svelte files like html
+au! BufNewFile,BufRead *.svelte set ft=html
 
-# USE: desktop
-#      desktop subfolder
-function desktop {
-  cd /Users/$USER/Desktop/$@
-}
+" Close buffer properly with NERDtree
+" http://stackoverflow.com/questions/1864394/vim-and-nerd-tree-closing-a-buffer-properly
+"
+" Command ':Bclose' executes ':bd' to delete buffer in current window.
+" The window will show the alternate buffer (Ctrl-^) if it exists,
+" or the previous buffer (:bp), or a blank buffer if no previous.
+" Command ':Bclose!' is the same, but executes ':bd!' (discard changes).
+" An optional argument can specify which buffer to close (name or number).
+function! s:Bclose(bang, buffer)
+if empty(a:buffer)
+let btarget = bufnr('%')
+elseif a:buffer =~ '^\d\+$'
+let btarget = bufnr(str2nr(a:buffer))
+else
+let btarget = bufnr(a:buffer)
+endif
+if btarget < 0
+call s:Warn('No matching buffer for '.a:buffer)
+return
+endif
+if empty(a:bang) && getbufvar(btarget, '&modified')
+call s:Warn('No write since last change for buffer '.btarget.' (use :Bclose!)')
+return
+endif
+" Numbers of windows that view target buffer which we will delete.
+let wnums = filter(range(1, winnr('$')), 'winbufnr(v:val) == btarget')
+if !g:bclose_multiple && len(wnums) > 1
+call s:Warn('Buffer is in multiple windows (use ":let bclose_multiple=1")')
+return
+endif
+let wcurrent = winnr()
+for w in wnums
+execute w.'wincmd w'
+let prevbuf = bufnr('#')
+if prevbuf > 0 && buflisted(prevbuf) && prevbuf != w
+buffer #
+else
+bprevious
+endif
+if btarget == bufnr('%')
+" Numbers of listed buffers which are not the target to be deleted.
+let blisted = filter(range(1, bufnr('$')), 'buflisted(v:val) && v:val !=
+btarget')
+" Listed, not target, and not displayed.
+let bhidden = filter(copy(blisted), 'bufwinnr(v:val) < 0')
+" Take the first buffer, if any (could be more intelligent).
+let bjump = (bhidden + blisted + [-1])[0]
+if bjump > 0
+execute 'buffer '.bjump
+else
+execute 'enew'.a:bang
+endif
+endif
+endfor
+execute 'bdelete'.a:bang.' '.btarget
+execute wcurrent.'wincmd w'
+endfunction
+command! -bang -complete=buffer -nargs=? Bclose call <SID>Bclose('<bang>','<args>')
+nnoremap <silent> <Leader>bd :Bclose<CR>
+nnoremap <silent> <Leader>bD :Bclose!<CR>
 
-# A function to easily grep for a matching process
-# USE: psg postgres
-function psg {
-  FIRST=`echo $1 | sed -e 's/^\(.\).*/\1/'`
-  REST=`echo $1 | sed -e 's/^.\(.*\)/\1/'`
-  ps aux | grep "[$FIRST]$REST"
-}
+" Chain vimgrep and copen
+augroup qf
+    autocmd!
+    autocmd QuickFixCmdPost [^l]* cwindow
+    autocmd QuickFixCmdPost l*    cwindow
+    autocmd VimEnter        *     cwindow
+augroup END
 
-# A function to extract correctly any archive based on extension
-# USE: extract imazip.zip
-#      extract imatar.tar
-function extract () {
-    if [ -f $1 ] ; then
-        case $1 in
-            *.tar.bz2)  tar xjf $1      ;;
-            *.tar.gz)   tar xzf $1      ;;
-            *.bz2)      bunzip2 $1      ;;
-            *.rar)      rar x $1        ;;
-            *.gz)       gunzip $1       ;;
-            *.tar)      tar xf $1       ;;
-            *.tbz2)     tar xjf $1      ;;
-            *.tgz)      tar xzf $1      ;;
-            *.zip)      unzip $1        ;;
-            *.Z)        uncompress $1   ;;
-            *)          echo "'$1' cannot be extracted via extract()" ;;
-        esac
-    else
-        echo "'$1' is not a valid file"
-    fi
-}
+" Change cursor appearance depending on the current mode
+let &t_SI = "\<Esc>]50;CursorShape=1\x7"
+let &t_SR = "\<Esc>]50;CursorShape=2\x7"
+let &t_EI = "\<Esc>]50;CursorShape=0\x7"
 
-# Aliases
-# =====================
-  # LS
-  alias l='ls -lah'
+""""""""""""""""""""""""""
+" Custom bindings
+""""""""""""""""""""""""""
 
-  # Git
-  alias gcl="git clone"
-  alias gst="git status"
-  alias gl="git pull"
-  alias gp="git push"
-  alias gd="git diff | code"
-  alias gc="git commit -v"
-  alias gca="git commit -v -a"
-  alias gb="git branch"
-  alias gba="git branch -a"
-  alias gcam="git commit -am"
-  alias gbb="git branch -b"
-  alias hbu="heroku pg:backups:capture --app flatiron-instructor-app; rm latest.dump; heroku pg:backups:download --app flatiron-instructor-app; rake local_setup:setup[luisa]"
+" Browse airline tabs
+:nnoremap <C-p> :bnext<CR>
+:nnoremap <C-o> :bprevious<CR>
 
-  alias note="bash ~/dev/scripts/note"
-  alias webserver="python -m SimpleHTTPServer 8000" # start simple js server
-  alias pgserver="postgres -D /usr/local/var/postgres" # start pg server
+" Close current buffer
+noremap <silent> <C-q> :Bclose!<CR>
 
-# Case-Insensitive Auto Completion
-  bind "set completion-ignore-case on"
+" Toggle Nerdtree
+noremap <silent> <C-n> ::NERDTreeToggle<CR>
 
-# Postgres
-export PATH=/Applications/Postgres.app/Contents/Versions/latest/bin:$PATH
+" Focus Nerdtree
+nnoremap <leader>n :NERDTreeFocus<CR>
 
-# Final Configurations and Plugins
-# =====================
-  # Git Bash Completion
-  # Will activate bash git completion if installed
-  # via homebrew
-  if [ -f `brew --prefix`/etc/bash_completion ]; then
-    . `brew --prefix`/etc/bash_completion
-  fi
+" toggle softwrap with :Wrap
+command! -nargs=* Wrap set wrap linebreak nolist
 
-##
-# Your previous /Users/lukeghenco/.bash_profile file was backed up as /Users/lukeghenco/.bash_profile.macports-saved_2018-01-03_at_08:15:55
-##
-
-# MacPorts Installer addition on 2018-01-03_at_08:15:55: adding an appropriate PATH variable for use with MacPorts.
-export PATH="/opt/local/bin:/opt/local/sbin:$PATH"
-# Finished adapting your PATH environment variable for use with MacPorts.
-
-export NVM_DIR="$HOME/.nvm"
-  [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"
-  [ -s "/usr/local/opt/nvm/etc/bash_completion.d/nvm" ] && \. "/usr/local/opt/nvm/etc/bash_completion.d/nvm"  # This loads nvm bash_completion
-  # RVM
-  # Mandatory loading of RVM into the shell
-  # This must be the last line of your bash_profile always
-  [[ -s "/Users/$USER/.rvm/scripts/rvm" ]] && source "/Users/$USER/.rvm/scripts/rvm"  # This loads RVM into a shell session.
-
-# Setting PATH for Python 3.8
-# The original version is saved in .bash_profile.pysave
-PATH="/Library/Frameworks/Python.framework/Versions/3.8/bin:${PATH}"
-export PATH
