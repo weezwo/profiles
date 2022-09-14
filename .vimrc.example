@@ -9,34 +9,44 @@
 "source ~/.vim_runtime/my_configs.vim
 "catch
 "endtry
-
 """""""""""""""""""""""""""
 " Plugins
 """""""""""""""""""""""""""
 call plug#begin('~/.vim/plugged')
 
 Plug 'tpope/vim-fugitive'
+" git wrapper
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
+" Airline
 "Plug 'jiangmiao/auto-pairs'
 Plug 'Townk/vim-autoclose'
 Plug 'tpope/vim-commentary'
+" gcc comments a line, gc comments a motion
 Plug 'Yggdroot/indentLine'
+" indent guides for indents w spaces
 Plug 'jistr/vim-nerdtree-tabs'
 Plug 'preservim/nerdtree' |
   \ Plug 'Xuyuanp/nerdtree-git-plugin' |
   \ Plug 'ryanoasis/vim-devicons'
 Plug 'vim-ruby/vim-ruby'
 Plug 'ervandew/supertab'
+" insert completion
 Plug 'posva/vim-vue'
 Plug 'severin-lemaignan/vim-minimap'
+" Sublime-style minimap
 Plug 'djoshea/vim-autoread'
+" reload files written to disk outside the buffer
 Plug 'slim-template/vim-slim'
 Plug 'airblade/vim-gitgutter'
 Plug 'morhetz/gruvbox'
+" theme <3
 Plug 'pangloss/vim-javascript'
 Plug 'tpope/vim-surround'
+" cs<char><target-char> changes surrounding chars
 Plug 'evanleck/vim-svelte'
+Plug 'leafgarland/typescript-vim'
+Plug 'maxmellon/vim-jsx-pretty'
 
 call plug#end()
 """""""""""""""""""""""""""
@@ -136,6 +146,7 @@ let g:syntastic_check_on_wq=0
 set background=dark
 set termguicolors
 "set guifont=Space\ Mono\ for\ Powerline:h14
+set guifont=Inconsolata\ for\ Powerline:h14
 autocmd vimenter * colorscheme gruvbox
 
 " Treat .svelte files like html
@@ -218,6 +229,8 @@ let &t_EI = "\<Esc>]50;CursorShape=0\x7"
 """"""""""""""""""""""""""
 " Custom bindings
 """"""""""""""""""""""""""
+" Escape insert mode with jk
+:inoremap jk <esc>
 
 " Browse airline tabs
 :nnoremap <C-p> :bnext<CR>
@@ -234,3 +247,9 @@ nnoremap <leader>n :NERDTreeFocus<CR>
 
 " toggle softwrap with :Wrap
 command! -nargs=* Wrap set wrap linebreak nolist
+
+""""""""""""""""""""""""""
+" Custom commands
+""""""""""""""""""""""""""
+" Insert HTML skeleton
+command Html r ~/Documents/dev/htmlskel
