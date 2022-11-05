@@ -40,6 +40,7 @@ Plug 'djoshea/vim-autoread'
 Plug 'slim-template/vim-slim'
 Plug 'airblade/vim-gitgutter'
 Plug 'morhetz/gruvbox'
+Plug 'sainnhe/everforest'
 " theme <3
 Plug 'pangloss/vim-javascript'
 Plug 'tpope/vim-surround'
@@ -47,6 +48,8 @@ Plug 'tpope/vim-surround'
 Plug 'evanleck/vim-svelte'
 Plug 'leafgarland/typescript-vim'
 Plug 'maxmellon/vim-jsx-pretty'
+Plug 'ap/vim-css-color'
+" preview css colors
 
 call plug#end()
 """""""""""""""""""""""""""
@@ -85,8 +88,8 @@ set clipboard+=unnamed
 set hidden
 
 " Reload files after change on Disk
-"set autoread
-"au CursorHold * checktime
+set autoread
+au CursorHold * checktime
 
 " Turn on syntax hightlighting.
 set syntax=on
